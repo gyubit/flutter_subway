@@ -8,7 +8,7 @@ class InfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final lineMap = {
+    final Map<String, String> lineMap = {
       '1001': '1호선',
       '1002': '2호선',
       '1003': '3호선',
@@ -30,15 +30,33 @@ class InfoCard extends StatelessWidget {
       '1032': 'GIX-A',
     };
 
+    final Map<String, String> arrivalCode = {
+      '0': '진입',
+      '1': '도착',
+      '2': '출발',
+      '3': '전역출발',
+      '4': '전역진입',
+      '5': '전역도착',
+      '99': '운행중',
+    };
+
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SizedBox(width: 50, child: Text(subwayInfo.subwayId)),
+          SizedBox(
+              width: 50,
+              child: Text(
+                lineMap[subwayInfo.subwayId].toString(),
+              )),
           SizedBox(width: 50, child: Text(subwayInfo.updnLine)),
           SizedBox(width: 180, child: Text(subwayInfo.bstatnNm)),
-          SizedBox(width: 50, child: Text(subwayInfo.arvlCd)),
+          SizedBox(
+              width: 50,
+              child: Text(
+                arrivalCode[subwayInfo.arvlCd].toString(),
+              )),
         ],
       ),
     );
