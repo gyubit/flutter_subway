@@ -14,6 +14,7 @@ class SubwayDataSource {
   }
 }
 
-void main() async {
-  print(await SubwayDataSource().getSubwayInfo('서울'));
-}
+// void main() async {
+//   final ins = await SubwayDataSource().getSubwayInfo('서울');
+//   print(ins.realtimeArrivalList?[0].subwayId);
+// }
