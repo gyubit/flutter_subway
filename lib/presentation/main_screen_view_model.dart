@@ -8,13 +8,14 @@ class MainScreenViewModel with ChangeNotifier {
   MainScreenViewModel({required SubwayInfoRepository subwayInfoRepository})
       : _subwayInfoRepository = subwayInfoRepository;
 
-  MainScreenState _state = MainScreenState();
+  MainScreenState _state = const MainScreenState();
 
   MainScreenState get state => _state;
 
   void onSearch(String query) async {
     _state = state.copyWith(isLoading: true);
     notifyListeners();
+
     _state = state.copyWith(
         infos: await _subwayInfoRepository.getSubwayInfo(query),
         isLoading: false);
