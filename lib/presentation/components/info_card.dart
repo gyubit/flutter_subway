@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_subway/data/model/subway_info.dart';
 
 class InfoCard extends StatelessWidget {
@@ -41,22 +43,40 @@ class InfoCard extends StatelessWidget {
     };
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 0.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SizedBox(
-              width: 50,
-              child: Text(
-                lineMap[subwayInfo.subwayId].toString(),
-              )),
-          SizedBox(width: 50, child: Text(subwayInfo.updnLine)),
-          SizedBox(width: 180, child: Text(subwayInfo.bstatnNm)),
-          SizedBox(
-              width: 50,
-              child: Text(
-                arrivalCode[subwayInfo.arvlCd].toString(),
-              )),
+          Expanded(
+            flex: 2,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  lineMap[subwayInfo.subwayId].toString(),
+                ),
+                Text(
+                  subwayInfo.updnLine,
+                ),
+
+              ],
+            ),
+          ),
+          SizedBox(width: 30),
+          Expanded(
+            flex: 3,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+            
+                Text(
+                  arrivalCode[subwayInfo.arvlCd].toString(),
+                ),
+                Text(subwayInfo.bstatnNm),
+            
+              ],
+            ),
+          ),
+
         ],
       ),
     );
