@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_subway/presentation/main_screen_view_model.dart';
+import 'package:provider/provider.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -13,6 +15,9 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.watch<MainScreenViewModel>();
+    final state = viewModel.state;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('지하철 실시간정보'),
@@ -30,20 +35,17 @@ class _MainScreenState extends State<MainScreen> {
               filled: true,
               fillColor: Colors.grey[100],
               suffixIcon: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  final query = _textEditingController.text;
+                  viewModel.onSearch(query);
+                },
                 icon: Icon(Icons.search),
               ),
             ),
           ),
           Expanded(
             child: ListView(
-              children: [
-                Row(
-                  children: [
-                    Text('a'),
-                  ],
-                ),
-              ],
+              children: state.infos.map((e) => Text(e.updnLine)).toList(),
             ),
           ),
         ],
