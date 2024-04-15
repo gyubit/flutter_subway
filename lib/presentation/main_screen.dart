@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_subway/presentation/components/info_card.dart';
 import 'package:flutter_subway/presentation/main_screen_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -20,32 +20,36 @@ class _MainScreenState extends State<MainScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('지하철 실시간정보'),
+        title: const Center(child: Text('지하철 실시간정보')),
       ),
       body: Column(
         children: [
-          TextField(
-            controller: _textEditingController,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              hintText: '역이름을 적어주세요',
-              //hintStyle: TextStyle(),
-              filled: true,
-              fillColor: Colors.grey[100],
-              suffixIcon: IconButton(
-                onPressed: () {
-                  final query = _textEditingController.text;
-                  viewModel.onSearch(query);
-                },
-                icon: Icon(Icons.search),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(64.0, 16.0, 64.0, 32.0),
+            child: TextField(
+              controller: _textEditingController,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                hintText: '역이름을 적어주세요',
+                //hintStyle: TextStyle(),
+                filled: true,
+                fillColor: Colors.grey[100],
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    final query = _textEditingController.text;
+                    viewModel.onSearch(query);
+                  },
+                  icon: const Icon(Icons.search),
+                ),
               ),
             ),
           ),
           Expanded(
             child: ListView(
-              children: state.infos.map((e) => Text(e.updnLine)).toList(),
+              children:
+                  state.infos.map((e) => InfoCard(subwayInfo: e)).toList(),
             ),
           ),
         ],
